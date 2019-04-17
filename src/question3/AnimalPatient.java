@@ -16,8 +16,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
+import java.util.*;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -114,6 +113,13 @@ public class AnimalPatient {
     public String toString() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         return name + "(" + species + "), priortiy = " + priority + ", Last seen: " + simpleDateFormat.format(dateLastSeen);
+    }
+
+    private static Date dateToCal(int year, int month, int date) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, date);
+
+        return cal.getTime();
     }
 
     private class DisplayPanel extends JPanel implements ChangeListener, DocumentListener {
@@ -217,15 +223,41 @@ public class AnimalPatient {
         AnimalPatient ciri = new AnimalPatient("Cat", "Ciri");
         ciri.loadImage("img/q3/ciri.jpg");
         ciri.setPriority(5);
+        Date change = dateToCal(2000, 1, 1);
+        ciri.updateDate(change);
         System.out.println(ciri);
         patients.add(ciri);
 
         AnimalPatient ginni = new AnimalPatient("Dog", "Ginni");
         ginni.loadImage("");
-        ginni.setPriority(9);
+        ginni.setPriority(5);
+        Date change2 = dateToCal(2010, 1, 1);
+        ginni.updateDate(change2);
         System.out.println(ginni);
         patients.add(ginni);
 
+        Comparator<AnimalPatient> compareByPrioroty = (o1, o2) -> {
+            int returnedVal;
+
+            if (o1.getPriority() < o2.getPriority()) {
+                returnedVal = -1;
+            } else if (o1.getPriority() > o2.getPriority()) {
+                returnedVal = 1;
+            } else returnedVal = 0;
+
+            if (returnedVal == 0) {
+                if (o1.dateLastSeen.compareTo(o2.dateLastSeen) < 0) {
+                    returnedVal = -1;
+                } else if (o1.dateLastSeen.compareTo(o2.dateLastSeen) > 0) {
+                    returnedVal = 1;
+                } else returnedVal = 0;
+            }
+
+            return returnedVal;
+        };
+
+        Collections.sort(patients, compareByPrioroty);
+        
         System.out.println(patients);
 
         JFrame frame = new JFrame("Seths - Vet of cute Animals");
@@ -237,47 +269,10 @@ public class AnimalPatient {
         Dimension dimension = toolkit.getScreenSize();
         int screenHeight = dimension.height;
         int screenWidth = dimension.width;
-        frame.pack(); //resize frame apropriately for its content
+        frame.pack(); //resize frame appropriately for its content
 
         //positions frame in center of screen
         frame.setLocation(new Point((screenWidth / 2) - (frame.getWidth() / 2), (screenHeight / 2) - (frame.getHeight() / 2)));
         frame.setVisible(true);
     }
-}
-
-class SortedArrayList<E extends Comparable<E>> extends LinkedList {
-    private Node<E> currentNode;
-    private Node<E> firstNode;
-
-    private int numElements;
-
-    public SortedArrayList() {
-        super();
-    }
-
-    @Override
-    public boolean add(Object o) {
-        Node<E> newNode = new Node<E>((E)o);
-
-        if (firstNode == null || o.compareTo(firstNode.element) < 0) {
-            newNode.next = firstNode;
-            firstNode = newNode;
-
-            numElements++;
-        }
-
-        super.add(o);
-        return super.add(o);
-    }
-
-    protected class Node<E> {
-        public E element;
-        public Node<E> next;
-
-        public Node(E element) {
-            this.element = element;
-            next = null;
-        }
-    }
-
 }
