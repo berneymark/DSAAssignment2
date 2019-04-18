@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<patients>
+    <animal id="0001">
+        <name>Tiddles</name>
+        <species>Cat</species>
+        <priority>5</priority>
+        <dateSeen>01-01-2021</dateSeen>
+        <hourSeen>14:30</hourSeen>
+    </animal>
+    <animal id="0002">
+
+    </animal>
+    <animal id="0003">
+
+    </animal>
+</patients>
