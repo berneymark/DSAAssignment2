@@ -1,16 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <patients>
-    <animal id="0001">
+    <animal>
         <name>Tiddles</name>
         <species>Cat</species>
+        <date>
+            <day>03</day>
+            <month>10</month>
+            <year>1997</year>
+            <time>0800</time>
+        </date>
         <priority>5</priority>
-        <dateSeen>01-01-2021</dateSeen>
-        <hourSeen>14:30</hourSeen>
     </animal>
-    <animal id="0002">
-
+    <animal>
+        <name>Peanut</name>
+        <species>Cat</species>
+        <date>
+            <day>25</day>
+            <month>12</month>
+            <year>2012</year>
+            <time>1215</time>
+        </date>
+        <priority>5</priority>
     </animal>
-    <animal id="0003">
-
+    <animal>
+        <name>Stripes</name>
+        <species>Cat</species>
+        <date>
+            <day>05</day>
+            <month>07</month>
+            <year>2019</year>
+            <time>2130</time>
+        </date>
+        <priority>5</priority>
     </animal>
 </patients>
