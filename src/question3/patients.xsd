@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="patients">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="animal" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="name">
+                            </xs:element>
+                            <xs:element type="xs:string" name="species">
+                            </xs:element>
+                            <xs:element name="date">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:int" name="day">
+                                        </xs:element>
+                                        <xs:element type="xs:int" name="month">
+                                        </xs:element>
+                                        <xs:element type="xs:int" name="year">
+                                        </xs:element>
+                                        <xs:element type="xs:int" name="time">
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element type="xs:int" name="priority">
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

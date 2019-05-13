@@ -17,16 +17,7 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSlider;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
@@ -132,14 +123,12 @@ public class AnimalPatient {
             super(new BorderLayout());
             super.setPreferredSize(new Dimension(600, 600));
 
-
             String date = simpleDateFormat.format(dateLastSeen);
 
             nameLabel = new JLabel("DATE/TIME SEEN: " + date + " - " + name +
                     ", [" + species + "]", SwingConstants.CENTER);
             nameLabel.setFont(new Font("Comic Sans", Font.BOLD, 14));
             super.add(nameLabel, BorderLayout.NORTH);
-
 
             super.add(new DrawPanel(), BorderLayout.CENTER);
 

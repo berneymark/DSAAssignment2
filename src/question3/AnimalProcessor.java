@@ -5,8 +5,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import java.util.LinkedList;
+import java.util.*;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -16,21 +16,28 @@ import org.xml.sax.SAXException;
 public class AnimalProcessor {
     final private String WIN_XML_PATH = "C:\\Users\\berne\\IdeaProjects\\DSAAssignment2\\src\\question3\\animals.xml";
     final private String MAC_XML_PATH = "";
-    private LinkedList<AnimalPatient> waitlist = new LinkedList<>();
+
+    private ArrayList<AnimalPatient> waitlist = new ArrayList<>();
 
     public void addAnimal(AnimalPatient animal) {
-        waitlist.addFirst(animal);
+        waitlist.add(animal);
+
+        Collections.sort(waitlist, new SortByPriority());
+    }
+
+    public AnimalPatient getAnimal(int index) {
+        return waitlist.get(index);
     }
 
     public AnimalPatient getNextAnimal() {
-        return waitlist.getFirst();
+        return waitlist.get(0);
     }
 
     public AnimalPatient releaseAnimal() {
-        return waitlist.removeFirst();
+        return waitlist.remove(0);
     }
 
-    public LinkedList<AnimalPatient> getWaitlist() {
+    public ArrayList<AnimalPatient> getWaitlist() {
         return waitlist;
     }
 
@@ -45,6 +52,8 @@ public class AnimalProcessor {
         int day, month, year;
         int time, hours, minutes;
         Date lastVisited;
+
+        int priority;
 
         try {
             Node rootElement = document.getFirstChild();
@@ -85,8 +94,13 @@ public class AnimalProcessor {
                         minutes = time % 100;
                         lastVisited = new Date(year, month, day, hours, minutes);
 
-                        waitlist.addLast(new AnimalPatient(species, name, lastVisited));
-                        waitlist.getLast().setPriority(5);
+                        NodeList priorityList = animalElement.getElementsByTagName("priority");
+                        NodeList textPriorityList = ((Element)priorityList.item(0)).getChildNodes();
+                        priority = Integer.parseInt(textPriorityList.item(0).getNodeValue().trim());
+
+                        AnimalPatient addedFromXML = new AnimalPatient(species, name, lastVisited);
+                        addedFromXML.setPriority(priority);
+                        addAnimal(addedFromXML);
                     }
                 }
             } else System.out.println("ROOT = NULL");
@@ -95,8 +109,8 @@ public class AnimalProcessor {
         }
     }
 
-    public void loadDocument() {
-        File vetPatients = new File(WIN_XML_PATH);
+    public void loadDocument(String path) {
+        File vetPatients = new File(path);
 
         try {
             DocumentBuilderFactory docBuildFactory = DocumentBuilderFactory.newInstance();
@@ -109,10 +123,10 @@ public class AnimalProcessor {
         }
     }
 
-    public static void main(String[] args) {
-        AnimalProcessor ap = new AnimalProcessor();
-        ap.loadDocument();
-
-        System.out.println(ap.waitlist);
+    class SortByPriority implements Comparator<AnimalPatient> {
+        @Override
+        public int compare(AnimalPatient o1, AnimalPatient o2) {
+            return o2.getPriority() - o1.getPriority();
+        }
     }
 }

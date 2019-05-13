@@ -9,7 +9,7 @@
             <year>1997</year>
             <time>0800</time>
         </date>
-        <priority>5</priority>
+        <priority>2</priority>
     </animal>
     <animal>
         <name>Peanut</name>
@@ -31,6 +31,6 @@
             <year>2019</year>
             <time>2130</time>
         </date>
-        <priority>5</priority>
+        <priority>8</priority>
     </animal>
 </patients>

@@ -41,7 +41,6 @@ public class BinarySearchTree<E> extends AbstractSet<E> implements SortedSet<E> 
         int nodeCount = 0 - (size() / 2);
         if (rootNode != null)
             drawNode(g, rootNode, panel_width / 2, 0, nodeCount);
-
     }
 
     private int drawNode(Graphics g, BinaryTreeNode current, int xPosition, int level, int nodeCount) {
