@@ -36,6 +36,21 @@ public class BinarySearchTree<E> extends AbstractSet<E> implements SortedSet<E> 
         this.comparator = comparator;
     }
 
+    public void leftRotation() {
+    	//TODO allow for left rotation if necessary
+    }
+    
+    public void rightRotation() {
+    	//TODO allow for right rotation if necessary    	
+    }
+    
+    public void levelOrder() {
+    	//TODO addJButton for this class in GUITree
+    }
+    
+    public void inOrder() {
+    	//TODO add JButton for this class in GUITree
+    }
 
     public void drawTree(Graphics g, int panel_width) {
         int nodeCount = 0 - (size() / 2);
@@ -452,3 +467,4 @@ public class BinarySearchTree<E> extends AbstractSet<E> implements SortedSet<E> 
         }
     }
 }
+
